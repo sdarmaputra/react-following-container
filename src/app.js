@@ -22,7 +22,7 @@ const App = (props) => {
 				<Instruction />
 				<Header title='React Following Container' />
 				<div className='navigation'>
-					<a href='https://github.com/react-following-container' className='navigation__item'>
+					<a href='https://github.com/sdarmaputra/react-following-container' className='navigation__item'>
 						<i className='lnr lnr-home'></i>
 					</a>
 					<NavLink exact to='/' className='navigation__item' activeClassName='navigation__item navigation__item--active'>Medium-like Actions</NavLink>
