@@ -1,0 +1,22 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.header {
+	position: relative;
+	width: 100%;
+	height: $baseline * 4;
+	text-align: center;
+	padding-top: $baseline;
+
+	&__title {
+		font-size: $baseline * 1.2;
+		font-weight: bold;
+		line-height: $baseline * 4;
+		color: #444;
+		@include transition(all 0.15s);
+		
+		&:hover {
+			color: #111;
+		}
+	}
+}

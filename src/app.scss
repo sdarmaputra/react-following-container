@@ -1,0 +1,54 @@
+@import './styles/variables';
+@import './styles/mixins';
+
+body { 
+	padding: 0; 
+	margin: 0;
+	font-size: $baseline * 0.6;
+	font-family: 'Roboto Slab', serif;
+	line-height: $baseline;
+	color: $primary-font-color;
+}
+
+a {
+	color: $primary-font-color;
+	text-decoration: none;
+	border-bottom: 1px dashed $primary-font-color;
+
+	&:hover {
+		color: #64C2D6;
+		border-bottom: 1px dashed #64C2D6;
+	}
+}
+
+.content-wrapper {
+	width: $content-width;
+	margin: auto;
+	margin-top: $baseline * 2;
+	margin-bottom: $baseline * 2;
+}
+
+.navigation {
+	width: $content-width;
+	margin: auto;
+	maring-bottom: $baseline;
+	text-align: center;
+
+	&__item {
+		padding: $baseline * 0.2;
+		margin: $baseline * 0.2;
+		text-decoration: none;
+		color: $primary-font-color;
+		border-bottom: none;
+		@include transition(all 0.2s);
+		
+		&:hover {
+			color: darken($primary-font-color, 20%);
+			border-bottom: none;
+		}
+
+		&--active {
+			border-bottom: 2px solid $primary-font-color;					color: darken($primary-font-color, 20%);
+		}
+	}
+}

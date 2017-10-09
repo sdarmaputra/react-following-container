@@ -1,0 +1,13 @@
+@import '../../styles/variables';
+
+.footer {
+	width: 100%;
+	padding: ($baseline * 2) $baseline;
+	text-align: center;
+	box-sizing: border-box;
+
+	&__text {
+		text-align: center;
+		color: lighten($primary-font-color, 30%);
+	}
+}

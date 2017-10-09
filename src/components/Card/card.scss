@@ -1,0 +1,24 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.card {
+	padding: $baseline * 0.5;
+	margin: $baseline * 0.5;
+	padding-bottom: $baseline * 1.4;
+	margin-bottom: $baseline * 1.4;
+	border-bottom: 1px solid #ebebeb;
+
+	&:last-child {
+		border-bottom: none;
+	}
+
+	&__title {
+		font-size: $baseline;
+		margin-bottom: $baseline * 0.8;
+		@include transition(all 0.15s);
+
+		&:hover {
+			color: darken($primary-font-color, 20%);
+		}
+	}
+}

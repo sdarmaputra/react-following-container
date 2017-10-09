@@ -1,0 +1,66 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.social-buttons {
+	width: $baseline * 2;
+
+	&--padded {
+		margin-left: $baseline * 4;
+	}
+	
+	&__item {
+		width: $baseline * 1.5;
+		height: $baseline * 1.5;
+		color: #fff;
+		background: #bbb;
+		display: block;
+		text-align: center;
+		font-size: $baseline * 0.4;
+		line-height: $baseline * 1.5;
+		cursor: pointer;
+		padding: 5px;
+		border: none;
+		@include transition(all 0.15s);
+		
+		i {
+			color: #fff;
+		}
+
+		&:hover {
+			background: darken(#bbb, 10%);
+			border: none;
+		}
+
+		&--facebook {
+			background: #4267b2;
+			&:hover {
+				background: darken(#4267b2, 10%);
+				border: none;		
+			}
+		}
+
+		&--twitter {
+			background: #84D9F9;
+			&:hover {
+				background: darken(#84D9F9, 10%);
+				border: none;		
+			}	
+		}
+
+		&--gplus {
+			background: #db4437;
+			&:hover {
+				background: darken(#db4437, 10%);
+				border: none;		
+			}
+		}
+
+		&--mail {
+			background: #666;
+			&:hover {
+				background: darken(#666, 10%);
+				border: none;		
+			}
+		}
+	}
+}
