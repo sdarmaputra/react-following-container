@@ -5,12 +5,12 @@ React High Order Component (HOC) for creating component that sticks and follows 
 *Note: this project is still under development*
 
 ## Usage
-```
+```javascript
 const FollowingComponent = followingContainer(WrappedComponent, configs);
 ```
 
 ## Example 
-```
+```javascript
 import React from 'react';
 import followingContainer from 'react-following-container';
 
