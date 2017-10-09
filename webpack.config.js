@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
 const SRC_DIR = path.resolve(__dirname, 'src');
-const DIST_DIR = path.resolve(__dirname, 'dist');
+const DIST_DIR = path.resolve(__dirname, 'docs');
 
 const generateHtml = new HtmlWebpackPlugin({
 	filename: 'index.html',
