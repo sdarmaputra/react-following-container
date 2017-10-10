@@ -1,12 +1,8 @@
-@import '../../styles/variables';
-@import '../../styles/mixins';
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
 
 .social-buttons {
 	width: $baseline * 2;
-
-	&--padded {
-		margin-left: $baseline * 4;
-	}
 	
 	&__item {
 		width: $baseline * 1.5;

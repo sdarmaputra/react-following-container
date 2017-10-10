@@ -2,7 +2,7 @@ import React from 'react';
 
 import SocialButtons from '../components/SocialButtons';
 import withSampleData from './utils/withSampleData';
-import followingContainer from '../libs/followingContainer';
+import followingContainer from '../../libs/followingContainer';
 
 const FollowingActions = followingContainer(SocialButtons, {
 	upperStopPoint: 200,
@@ -31,7 +31,7 @@ const ActionsWrapper = (props) => {
 		}
 	];
 
-	return <FollowingActions padded={false} actions={actions} />;
+	return <FollowingActions actions={actions} />;
 }
 
 const Page = withSampleData(ActionsWrapper);

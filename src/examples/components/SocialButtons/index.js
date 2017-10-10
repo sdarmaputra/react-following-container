@@ -2,7 +2,7 @@ import React from 'react';
 import './socialButtons.scss';
 
 const SocialButtons = (props) => (
-	<div className={`social-buttons ${props.padded ? 'social-buttons--padded' : ''}`}>
+	<div className='social-buttons'>
 	{
 		props.actions.map((action, index) => {
 			return (

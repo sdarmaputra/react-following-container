@@ -14,6 +14,7 @@ import Instruction from './components/Instruction';
 import MediumLikeActions from './pages/MediumLikeActions';
 import SocialButtonActions from './pages/SocialButtonActions';
 import SocialButtonActions2 from './pages/SocialButtonActions2';
+import MultipleActions from './pages/MultipleActions';
 
 const App = (props) => {
 	return (
@@ -28,11 +29,13 @@ const App = (props) => {
 					<NavLink exact to='/' className='navigation__item' activeClassName='navigation__item navigation__item--active'>Medium-like Actions</NavLink>
 					<NavLink to='/social-buttons' className='navigation__item' activeClassName='navigation__item navigation__item--active'>Social Buttons</NavLink>
 					<NavLink to='/social-buttons-2' className='navigation__item' activeClassName='navigation__item navigation__item--active'>Social Buttons (2)</NavLink>
+					<NavLink to='/multiple-actions' className='navigation__item' activeClassName='navigation__item navigation__item--active'>Multiple Actions</NavLink>
 				</div>
 
 				<Route exact path='/' component={MediumLikeActions} />
 				<Route path='/social-buttons' component={SocialButtonActions} />
-				<Route path='/social-buttons-2' component={SocialButtonActions2} />
+				<Route path='/social-buttons-2' component={SocialButtonActions2} />	
+				<Route path='/multiple-actions' component={MultipleActions} />
 				<Footer />
 			</div>
 		</Router>

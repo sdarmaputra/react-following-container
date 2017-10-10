@@ -4,11 +4,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
 const SRC_DIR = path.resolve(__dirname, 'src');
+const EXAMPLES_DIR = path.resolve(SRC_DIR, 'examples');
 const DIST_DIR = path.resolve(__dirname, 'docs');
 
 const generateHtml = new HtmlWebpackPlugin({
 	filename: 'index.html',
-	template: path.resolve(SRC_DIR, 'index.html'),
+	template: path.resolve(EXAMPLES_DIR, 'index.html'),
 	inject: false
 });
 const extractSass = new ExtractTextPlugin({
@@ -16,7 +17,7 @@ const extractSass = new ExtractTextPlugin({
 });
 
 const configs = {
-	entry: path.resolve(SRC_DIR, 'app.js'),
+	entry: path.resolve(EXAMPLES_DIR, 'app.js'),
 	output: {
 		path: DIST_DIR,
 		filename: 'app.js',
@@ -44,7 +45,7 @@ const configs = {
 		extractSass
 	],
 	devServer: {
-		contentBase: SRC_DIR,
+		contentBase: EXAMPLES_DIR,
 		port: 8080
 	}
 };

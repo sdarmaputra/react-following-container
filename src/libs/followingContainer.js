@@ -2,7 +2,11 @@ import React from 'react';
 import './followingContainer.scss';
 
 const initialConfigs = {
+	position: 'left',
+	marginLeft: 0,
+	marginRight: 0,
 	upperStopPoint: 10,
+	lowerStopPoint: 10,
 	viewportPaddingTop: 10,
 	hideOnStart: false,
 	hideOnTop: false
@@ -14,14 +18,21 @@ const followingContainer = (WrappedComponent, configs = {}) => {
 		constructor(props) {
 			super(props);
 			this.state = {
-				hidden: currentConfigs.hideOnStart
+				hidden: currentConfigs.hideOnStart,
+				top: 0
 			};
-			this.setContainerInitialPosition = this.setContainerInitialPosition.bind(this);
+			this.currentConfigs = currentConfigs;
+			this.availablePositions = ['left', 'right'];
+
 			this.changeContainerPosition = this.changeContainerPosition.bind(this);
+			this.handleMovementWhenScrollBeyondStopPoint = this.handleMovementWhenScrollBeyondStopPoint.bind(this); 
+			this.handleMovementWhenScrollInsideStopPoint = this.handleMovementWhenScrollInsideStopPoint.bind(this);
 		}
-			
+  
 		componentDidMount() {
-			this.setContainerInitialPosition();
+			this.setState({
+				top: this.currentConfigs.upperStopPoint
+			});
 			window.addEventListener('scroll', this.changeContainerPosition);
 		}
 
@@ -29,27 +40,47 @@ const followingContainer = (WrappedComponent, configs = {}) => {
 			window.removeEventListener('scroll', this.changeContainerPosition);
 		}
 
-		setContainerInitialPosition() {
-			this.wrapper.setAttribute('style', `top: ${currentConfigs.upperStopPoint}px`);
-		}
-
 		changeContainerPosition() {
 			let scrollPosition = window.scrollY;
-			let componentPosition = this.wrapper.offsetTop;
+			this.handleMovementWhenScrollBeyondStopPoint(scrollPosition);
+			this.handleMovementWhenScrollInsideStopPoint(scrollPosition);
+		}
 
-			if (scrollPosition !== componentPosition && scrollPosition > currentConfigs.upperStopPoint) {
-				if (this.state.hidden) this.setState({ hidden: false });
-				this.wrapper.setAttribute('style', `top: ${scrollPosition + currentConfigs.viewportPaddingTop}px`);
+		handleMovementWhenScrollBeyondStopPoint(scrollPosition) {
+			let maxMovingPoint = document.documentElement.scrollHeight - this.currentConfigs.lowerStopPoint;
+			let nextContainerPosition = scrollPosition + this.currentConfigs.viewportPaddingTop;
+	
+			if (scrollPosition !== this.state.top && scrollPosition >= this.currentConfigs.upperStopPoint &&  nextContainerPosition <= maxMovingPoint) {
+				let newState = Object.assign({}, { 
+					top: nextContainerPosition
+				}, 
+				this.state.hidden ? { hidden: false } : {});
+				this.setState(newState);
 			}
-			if (scrollPosition !== componentPosition && scrollPosition <= currentConfigs.upperStopPoint) {
-				this.wrapper.setAttribute('style', `top: ${currentConfigs.upperStopPoint}px`);
+		}
+
+		handleMovementWhenScrollInsideStopPoint(scrollPosition) {
+			if (scrollPosition !== this.state.top && scrollPosition < this.currentConfigs.upperStopPoint) {
+				let newState = Object.assign({}, {
+					top: this.currentConfigs.upperStopPoint
+				},
+				this.currentConfigs.hideOnTop ? { hidden: true } : {});
+				this.setState(newState);
 			}
-			if (scrollPosition <= currentConfigs.upperStopPoint && configs.hideOnTop) this.setState({ hidden: true });
 		}
 
 		render() {
+			let position = this.availablePositions.includes(this.currentConfigs.position) ? this.currentConfigs.position : this.availablePositions[0]; 
+			let style = {
+				top: this.state.top,
+				marginLeft: this.currentConfigs.marginLeft,
+				marginRight: this.currentConfigs.marginRight
+			};
 			return (
-				<div ref={(wrapper) => this.wrapper = wrapper} className={`following-container ${this.state.hidden ? 'following-container--hidden' : ''}`}>
+				<div 
+					ref={(wrapper) => this.wrapper = wrapper} 
+					className={`following-container following-container--${position} ${this.state.hidden ? 'following-container--hidden' : ''}`}
+					style={style}>
 					<WrappedComponent {...this.props} />
 				</div>
 			);

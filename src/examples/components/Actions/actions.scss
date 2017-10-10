@@ -1,9 +1,8 @@
-@import '../../styles/variables';
-@import '../../styles/mixins';
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
 
 .actions {
 	width: $baseline * 2;
-	margin-left: $baseline * 4;
 	
 	&__item {
 		width: $baseline * 1.5;
