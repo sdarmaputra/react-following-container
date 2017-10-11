@@ -23,7 +23,7 @@ const basicTest = () => {
 			expect(this.wrapper.instance()).to.have.property('currentConfigs');
 		});
 
-		it(	'should have default properties in currentConfigs', function() {
+		it('should have default properties in currentConfigs', function() {
 			let currentConfigs = this.wrapper.instance().currentConfigs;
 			expect(currentConfigs).to.have.all.keys([
 				'position',

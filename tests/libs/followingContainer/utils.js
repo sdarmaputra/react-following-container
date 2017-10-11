@@ -3,7 +3,10 @@ import ReactDOM from 'react-dom';
 import { shallow, mount } from 'enzyme';
 import sass from 'node-sass';
 import path from 'path';
+import Browser from 'jsdom-browser';
 import followingContainer from '../../../src/libs/followingContainer.js';
+
+const browser = new Browser();
 
 export const prepareDocument = () => {
 	const css = sass.renderSync({
@@ -14,7 +17,7 @@ export const prepareDocument = () => {
 	style.setAttribute('type', 'text/css');
 	style.appendChild(document.createTextNode(css));
 	head.appendChild(style);
-	document.body.innerHTML = '<div id="app" style="height: 2000px;"></div>';
+	document.body.innerHTML = '<div id="app" style="height: 3000px; display: block"></div>';
 }
 
 export const mountComponent = (configs = {}) => {
