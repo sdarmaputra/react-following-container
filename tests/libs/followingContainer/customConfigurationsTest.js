@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import { renderComponent } from './utils';
 
 const customConfigurationsTest = () => {
@@ -8,19 +7,18 @@ const customConfigurationsTest = () => {
 				const initialComponent = renderComponent({ position: 'left' });
 				expect(initialComponent.wrapper.find('.following-container--left')).to.have.length(1);
 				expect(initialComponent.computedStyle.position).to.equal('absolute');
-				expect(initialComponent.computedStyle.left).to.equal('0px');
-				expect(initialComponent.computedStyle.right).to.equal('');
-
+				expect(initialComponent.computedStyle.left).to.equal('0px');	
+				expect(initialComponent.computedStyle.right).to.not.equal('0px');	
 			});
 
 			it('should have corresponding class and style when position set to right', function() {
 				const initialComponent = renderComponent({ position: 'right' });
 				expect(initialComponent.wrapper.find('.following-container--right')).to.have.length(1);
 				expect(initialComponent.computedStyle.position).to.equal('absolute');
-				expect(initialComponent.computedStyle.left).to.equal('');
 				expect(initialComponent.computedStyle.right).to.equal('0px');
+				expect(initialComponent.computedStyle.left).to.not.equal('0px');
+});
 			});
-		});
 
 		describe('modify marginLeft option', function() {
 			it('should set margin-left style', function() {

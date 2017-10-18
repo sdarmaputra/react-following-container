@@ -1,26 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { shallow, mount } from 'enzyme';
-import sass from 'node-sass';
-import path from 'path';
-import Browser from 'jsdom-browser';
 import followingContainer from '../../../src/libs/followingContainer.js';
 
-const browser = new Browser();
+var containers = [];
+document.body.setAttribute('style', 'height: 3000px;');
 
 export const prepareDocument = () => {
-	const css = sass.renderSync({
-		file: path.resolve(__dirname, '../../../src/libs/followingContainer.scss')
-	}).css.toString();	
-	const head = document.getElementsByTagName('head')[0];
-	const style = document.createElement('style');
-	style.setAttribute('type', 'text/css');
-	style.appendChild(document.createTextNode(css));
-	head.appendChild(style);
-	document.body.innerHTML = '<div id="app" style="height: 3000px; display: block"></div>';
+	const mainElement = document.createElement('div');
+	const elementId = `app${containers.length}`;
+	containers.push(elementId);
+	mainElement.setAttribute('id', elementId);
+	document.body.appendChild(mainElement);
+	return elementId;
 }
 
-export const mountComponent = (configs = {}) => {
+export const mountComponent = (configs = {}, containerId) => {
 	const WrappedComponent = (props) => (
 		<div>
 			<div>Wrapped component</div>
@@ -29,18 +24,23 @@ export const mountComponent = (configs = {}) => {
 	);
 	const FollowingComponent = followingContainer(WrappedComponent, configs);
 	const wrapper = mount(<FollowingComponent />);
-	ReactDOM.render(<FollowingComponent />, document.getElementById('app'));
-	const element = document.getElementsByClassName('following-container')[0];
+	const container = document.getElementById(containerId);
+	ReactDOM.render(<FollowingComponent />, container);
+	const element = container.getElementsByClassName('following-container')[0];
 	const computedStyle = window.getComputedStyle(element);
+	const getLatestComputedStyle = () => {
+		return window.getComputedStyle(element);
+	}
 
 	return {
 		wrapper,
 		WrappedComponent,
-		computedStyle
+		computedStyle,
+		getLatestComputedStyle
 	};
 }
 
 export const renderComponent = (configs = {}) => {
-	prepareDocument();
-	return mountComponent(configs);
+	const containerId = prepareDocument();
+	return mountComponent(configs, containerId);
 }
