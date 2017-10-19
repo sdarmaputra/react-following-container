@@ -47,7 +47,9 @@ module.exports = function(config) {
 
 	coverageReporter: {
 		reporters: [
-			{ type: 'lcov', dir: 'coverage' },
+			{ type: 'lcov', dir: 'coverage', subdir: function(browser) {
+				return browser.toLowerCase().split(/[ /-]/)[0];
+			} },
 			{ type: 'text-summary' }
 		]
 	},

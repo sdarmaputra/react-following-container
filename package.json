@@ -9,7 +9,8 @@
     "dev": "webpack-dev-server --hot --open",
     "build": "webpack -p",
     "test": "rm -rf coverage && karma start --single-run --browsers ChromeHeadless karma.config.js",
-    "watch-test": "rm -rf coverage && karma start karma.config.js"
+    "watch-test": "rm -rf coverage && karma start karma.config.js",
+	"coveralls": "cat ./coverage/headlesschrome/lcov.info | coveralls"
   },
   "dependencies": {
     "react": "^16.0.0",
