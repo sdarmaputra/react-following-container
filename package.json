@@ -10,7 +10,7 @@
     "build": "webpack -p",
     "test": "rm -rf coverage && karma start --single-run --browsers ChromeHeadless karma.config.js",
     "watch-test": "rm -rf coverage && karma start karma.config.js",
-	"coveralls": "cat ./coverage/headlesschrome/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    "coveralls": "cat ./coverage/headlesschrome/lcov.info | node_modules/coveralls/bin/coveralls.js"
   },
   "dependencies": {
     "react": "^16.0.0",
@@ -31,6 +31,7 @@
     "browserify-istanbul": "^3.0.1",
     "chai": "^4.1.2",
     "chai-enzyme": "beta",
+    "coveralls": "^3.0.0",
     "css-loader": "^0.28.7",
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-16": "^1.0.1",
