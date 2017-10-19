@@ -36,7 +36,8 @@ export const mountComponent = (configs = {}, containerId) => {
 		wrapper,
 		WrappedComponent,
 		computedStyle,
-		getLatestComputedStyle
+		getLatestComputedStyle,
+		element
 	};
 }
 

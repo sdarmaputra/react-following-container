@@ -17,18 +17,19 @@ const behaviorTest = () => {
 				expect(this.component.computedStyle.top).to.equal(`${this.upperStopPoint}px`);	
 			});
 
-			it('should change its top position if window scrolled more than upperStopPoint', function() {
+			it('should change its top position if window scrolled more than upperStopPoint', function(done) {
 				let nextYPosition = 400;
 				let currentConfigs = this.component.wrapper.instance().currentConfigs;
 				let expectedYPosition = nextYPosition + currentConfigs.viewportPaddingTop;
 				window.scrollTo(0, nextYPosition);
-				let wait = setTimeout(function() {
+				let wait = setTimeout(function() {				
 					expect(this.component.getLatestComputedStyle().top).to.equal(`${expectedYPosition}px`);
 					clearTimeout(wait);
-				}, 5000);
+					done();
+				}.bind(this), 1000);
 			});
 
-			it('should change its top position to upperStopPoint if window scrolled upward to lower than or equal to upperStopPoint', function() {
+			it('should change its top position to upperStopPoint if window scrolled upward to lower than or equal to upperStopPoint', function(done) {
 				let nextYPosition = 100;
 				let currentConfigs = this.component.wrapper.instance().currentConfigs;
 				let expectedYPosition = currentConfigs.upperStopPoint;
@@ -36,7 +37,8 @@ const behaviorTest = () => {
 				let wait = setTimeout(function() {
 					expect(this.component.getLatestComputedStyle().top).to.equal(`${expectedYPosition}px`);
 					clearTimeout(wait);
-				}, 5000);
+					done();
+				}.bind(this), 1000);
 			});
 		});
 	
@@ -47,8 +49,8 @@ const behaviorTest = () => {
 				this.component = renderComponent({ upperStopPoint: this.upperStopPoint, lowerStopPoint: this.lowerStopPoint });
 			});
 
-			it('should change its top position if window scrolled between upperStopPoint and lowerStopPoint', function() {
-				let nextYPosition = 1999;
+			it('should change its top position if window scrolled between upperStopPoint and lowerStopPoint', function(done) {
+				let nextYPosition = 1809;
 				let currentConfigs = this.component.wrapper.instance().currentConfigs;
 				let oldYPosition = this.component.getLatestComputedStyle().top;
 				let expectedYPosition = nextYPosition + currentConfigs.viewportPaddingTop;
@@ -57,18 +59,20 @@ const behaviorTest = () => {
 					expect(this.component.getLatestComputedStyle().top).to.not.equal(`${oldYPosition}px`);
 					expect(this.component.getLatestComputedStyle().top).to.equal(`${expectedYPosition}px`);
 					clearTimeout(wait);
-				}, 5000);
+					done();
+				}.bind(this), 1000);
 			});
 
-			it('should not change its top position beyond lowerStopPoint', function() {
+			it('should not change its top position beyond lowerStopPoint', function(done) {
 				let nextYPosition = 2100;
 				let currentConfigs = this.component.wrapper.instance().currentConfigs;
 				let oldYPosition = this.component.getLatestComputedStyle().top;
 				window.scrollTo(0, nextYPosition);
 				let wait = setTimeout(function() {
-					expect(this.component.getLatestComputedStyle().top).to.equal(`${oldYPosition}px`);
+					expect(this.component.getLatestComputedStyle().top).to.equal(`${oldYPosition}`);
 					clearTimeout(wait);
-				}, 5000);
+					done();
+				}.bind(this), 1000);
 			});
 		});
 
@@ -86,31 +90,33 @@ const behaviorTest = () => {
 					});
 					clearTimeout(wait);
 					done();
-				}, 1500);
+				}.bind(this), 1000);
 			});	
 
+			it('should have class name "following-container--hidden" after initial render', function() {
+				expect(this.component.wrapper.find('.following-container--hidden')).to.have.length(1);
+			});		
+
 			it('should have zero opacity after initial render', function() {
-				window.scrollTo(0, 0);
-				let wait = setTimeout(function() {
-					expect(this.component.getLatestComputedStyle().opacity).to.equal(0);
-					clearTimeout(wait);
-				}, 5000);
+				expect(this.component.getLatestComputedStyle().opacity).to.equal('0');
 			});
 
-			it('should have zero opacity when window scroll below upperStopPoint', function() {
+			it('should have zero opacity when window scroll below upperStopPoint', function(done) {
 				let nextYPosition = 100;
 				window.scrollTo(0, nextYPosition);
 				let wait = setTimeout(function() {
-					expect(this.component.getLatestComputedStyle().opacity).to.equal(0);
-				});
+					expect(this.component.getLatestComputedStyle().opacity).to.equal('0');
+					done();
+				}.bind(this), 1000);
 			});
 				
-			it('should have full opacity when window scroll beyond upperStopPoint', function() {
+			it('should have full opacity when window scroll beyond upperStopPoint', function(done) {
 				let nextYPosition = 210;
 				window.scrollTo(0, nextYPosition);
 				let wait = setTimeout(function() {
-					expect(this.component.getLatestComputedStyle().opacity).to.equal(1);
-				});
+					expect(this.component.getLatestComputedStyle().opacity).to.equal('1');
+					done();
+				}.bind(this), 1000);
 			});	
 		});
 			
@@ -126,21 +132,40 @@ const behaviorTest = () => {
 				});
 			});	
 
-			it('should have full opacity when window scrolled beyond upperStopPoint', function() {
+			it('should have full opacity when window scrolled beyond upperStopPoint', function(done) {
 				window.scrollTo(0, 205);
 				let wait = setTimeout(function() {
-					expect(this.component.getLatestComputedStyle().opacity).to.equal(1);
+					expect(this.component.getLatestComputedStyle().opacity).to.equal('1');
 					clearTimeout(wait);
-				}, 5000);
+					done();
+				}.bind(this), 1000);
 			});
 
-			it('should have zero opacity when window scrolled below upperStopPoint', function() {
+			it('should have zero opacity when window scrolled below upperStopPoint', function(done) {
 				let nextYPosition = 100;
 				window.scrollTo(0, nextYPosition);
 				let wait = setTimeout(function() {
-					expect(this.component.getLatestComputedStyle().opacity).to.equal(0);
-				});
+					expect(this.component.getLatestComputedStyle().opacity).to.equal('0');
+					clearTimeout(wait);
+					done();
+				}.bind(this), 1000);
 			});		
+			
+			it('should have class name "following-container--hidden" when window scrolled below upperStopPoint', function(done) {
+				this.timeout(3000);
+				let nextYPosition = 100;
+				window.scrollTo(0, 600);
+				let initialWait = setTimeout(function() {
+					window.scrollTo(0, nextYPosition);
+					let wait = setTimeout(function() {
+						let classList = this.component.element.classList;
+						expect(classList.contains('following-container--hidden')).to.equal(true);
+						clearTimeout(wait);
+						done();
+					}.bind(this), 1000);
+					clearTimeout(initialWait);
+				}.bind(this), 1000);
+			});			
 		});
 	});
 }
