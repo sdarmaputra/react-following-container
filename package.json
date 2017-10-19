@@ -10,7 +10,7 @@
     "build": "webpack -p",
     "test": "rm -rf coverage && karma start --single-run --browsers ChromeHeadless karma.config.js",
     "watch-test": "rm -rf coverage && karma start karma.config.js",
-	"coveralls": "cat ./coverage/headlesschrome/lcov.info | coveralls"
+	"coveralls": "cat ./coverage/headlesschrome/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "dependencies": {
     "react": "^16.0.0",
