@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { shallow, mount } from 'enzyme';
-import followingContainer from '../../../src/libs/followingContainer.js';
+import followingContainer from '../../../index.js';
 
 var containers = [];
 document.body.setAttribute('style', 'height: 3000px;');

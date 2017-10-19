@@ -8,8 +8,9 @@
   "scripts": {
     "dev": "webpack-dev-server --hot --open",
     "build": "webpack -p",
-    "test": "karma start --single-run --browsers PhantomJS karma.config.js",
-    "watch-test": "karma start karma.config.js"
+    "test": "rm -rf coverage && karma start --single-run --browsers ChromeHeadless karma.config.js",
+    "watch-test": "rm -rf coverage && karma start karma.config.js",
+    "coveralls": "cat ./coverage/headlesschrome/lcov.info | node_modules/coveralls/bin/coveralls.js"
   },
   "dependencies": {
     "react": "^16.0.0",
@@ -20,14 +21,17 @@
     "babel": "^6.23.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
+    "babel-plugin-istanbul": "^4.1.5",
     "babel-polyfill": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-register": "^6.26.0",
     "babelify": "^7.3.0",
     "browserify": "^14.4.0",
+    "browserify-istanbul": "^3.0.1",
     "chai": "^4.1.2",
     "chai-enzyme": "beta",
+    "coveralls": "^3.0.0",
     "css-loader": "^0.28.7",
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-16": "^1.0.1",
@@ -40,6 +44,7 @@
     "karma-browserify": "^5.1.1",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^2.2.0",
+    "karma-coverage": "^1.1.1",
     "karma-mocha": "^1.3.0",
     "karma-mocha-reporter": "^2.2.5",
     "karma-phantomjs-launcher": "^1.0.4",

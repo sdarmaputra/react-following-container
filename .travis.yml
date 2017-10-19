@@ -1,5 +1,18 @@
 language: node_js
 node_js:
   - "7"
+dist: trusty
+sudo: false
+addons:
+  chrome: stable
+cache:
+  yarn: true
+  directories:
+    - node_modules
 env:
   - NODE_ENV=test
+install:
+  - yarn
+script:
+  - yarn test
+after_success: 'yarn run coveralls'

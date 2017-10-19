@@ -1,3 +1,3 @@
-import followingContainer from './libs/followingContainer';
+import followingContainer from './src/libs/followingContainer';
 
 module.exports = followingContainer;
