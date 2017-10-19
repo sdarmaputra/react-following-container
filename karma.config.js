@@ -38,13 +38,19 @@ module.exports = function(config) {
 
 	browserify: {
 	  debug: true,
-	  transform: [['babelify', { presets: ['es2015', 'react'] }], 'sassify']
+	  transform: [['babelify', { presets: ['es2015', 'react'], plugins: [['istanbul', { include: ['src/libs/**/*.js'] }]] }], 'sassify']
 	},
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['mocha'],
+    reporters: ['mocha', 'coverage'],
 
+	coverageReporter: {
+		reporters: [
+			{ type: 'lcov', dir: 'coverage' },
+			{ type: 'text-summary' }
+		]
+	},
 
     // web server port
     port: 9876,
@@ -65,7 +71,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS'].concat(process.env.NODE_ENV !== 'test' && process.env.NODE_ENV !== 'prod' ? ['Chrome'] : []),
+    browsers: ['ChromeHeadless'].concat(process.env.NODE_ENV !== 'test' && process.env.NODE_ENV !== 'prod' ? ['Chrome'] : []),
 
 
     // Continuous Integration mode
