@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/sdarmaputra/react-following-container.svg?branch=master)](https://travis-ci.org/sdarmaputra/react-following-container)
 
+[![Coverage Status](https://coveralls.io/repos/github/sdarmaputra/react-following-container/badge.svg)](https://coveralls.io/github/sdarmaputra/react-following-container)
+
 React Higher Order Component (HOC) for creating moving component that sticks and follows when the browser scrolled. 
 
 ### Use Cases
