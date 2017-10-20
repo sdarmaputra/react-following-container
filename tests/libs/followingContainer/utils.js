@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { shallow, mount } from 'enzyme';
+import sinon from 'sinon';
 import followingContainer from '../../../index.js';
 
 var containers = [];
@@ -23,6 +24,7 @@ export const mountComponent = (configs = {}, containerId) => {
 		</div>
 	);
 	const FollowingComponent = followingContainer(WrappedComponent, configs);
+	const spyChangeContainerPosition = sinon.spy(FollowingComponent.prototype, 'changeContainerPosition');
 	const wrapper = mount(<FollowingComponent />);
 	const container = document.getElementById(containerId);
 	ReactDOM.render(<FollowingComponent />, container);
@@ -31,13 +33,18 @@ export const mountComponent = (configs = {}, containerId) => {
 	const getLatestComputedStyle = () => {
 		return window.getComputedStyle(element);
 	}
+	const unmount = () => {
+		ReactDOM.unmountComponentAtNode(container);
+	}
 
 	return {
 		wrapper,
 		WrappedComponent,
 		computedStyle,
 		getLatestComputedStyle,
-		element
+		element,
+		spyChangeContainerPosition,
+		unmount
 	};
 }
 

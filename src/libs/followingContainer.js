@@ -42,31 +42,30 @@ const followingContainer = (WrappedComponent, configs = {}) => {
 
 		changeContainerPosition() {
 			let scrollPosition = window.scrollY;
-			this.handleMovementWhenScrollBeyondStopPoint(scrollPosition);
-			this.handleMovementWhenScrollInsideStopPoint(scrollPosition);
-		}
-
-		handleMovementWhenScrollBeyondStopPoint(scrollPosition) {
 			let maxMovingPoint = document.documentElement.scrollHeight - this.currentConfigs.lowerStopPoint;
-			let nextContainerPosition = scrollPosition + this.currentConfigs.viewportPaddingTop;
-	
+			let nextContainerPosition = scrollPosition + this.currentConfigs.viewportPaddingTop;	
+
 			if (scrollPosition !== this.state.top && scrollPosition >= this.currentConfigs.upperStopPoint &&  nextContainerPosition <= maxMovingPoint) {
-				let newState = Object.assign({}, { 
-					top: nextContainerPosition
-				}, 
-				this.state.hidden ? { hidden: false } : {});
-				this.setState(newState);
+				this.handleMovementWhenScrollBeyondStopPoint(nextContainerPosition);
+			} else if (scrollPosition !== this.state.top && scrollPosition < this.currentConfigs.upperStopPoint) {
+				this.handleMovementWhenScrollInsideStopPoint();
 			}
 		}
 
-		handleMovementWhenScrollInsideStopPoint(scrollPosition) {
-			if (scrollPosition !== this.state.top && scrollPosition < this.currentConfigs.upperStopPoint) {
-				let newState = Object.assign({}, {
-					top: this.currentConfigs.upperStopPoint
-				},
-				this.currentConfigs.hideOnTop ? { hidden: true } : {});
-				this.setState(newState);
-			}
+		handleMovementWhenScrollBeyondStopPoint(nextContainerPosition) {
+			let newState = Object.assign({}, { 
+				top: nextContainerPosition
+			}, 
+			this.state.hidden ? { hidden: false } : {});
+			this.setState(newState);
+		}
+
+		handleMovementWhenScrollInsideStopPoint() {
+			let newState = Object.assign({}, {
+				top: this.currentConfigs.upperStopPoint
+			},
+			this.currentConfigs.hideOnTop ? { hidden: true } : {});
+			this.setState(newState);
 		}
 
 		render() {

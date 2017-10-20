@@ -2,6 +2,29 @@ import { renderComponent } from './utils';
 
 const behaviorTest = () => {
 	return describe('behavior', function() {
+		describe('component\'s method is called', function() {
+			it('should call changeContainerPosition method when window scrolled', function(done) {
+				const component = renderComponent();
+				window.scrollTo(0, 200);
+				let wait = setTimeout(function() {
+					expect(component.spyChangeContainerPosition.called).to.equal(true);			
+					clearTimeout(wait);
+					done();
+				}.bind(this), 1500);
+			});
+	
+			it('should not call changeContainerPosition method when window scrolled if component unmounted', function(done) {
+				const component = renderComponent();
+				component.unmount();
+				window.scrollTo(0, 200);
+				let wait = setTimeout(function() {
+					expect(component.spyChangeContainerPosition.called).to.equal(false);			
+					clearTimeout(wait);
+					done();
+				}.bind(this), 1500);
+			});
+		});
+
 		describe('related to upperStopPoint option', function() {
 			beforeEach(function() {
 				this.upperStopPoint = 200;
