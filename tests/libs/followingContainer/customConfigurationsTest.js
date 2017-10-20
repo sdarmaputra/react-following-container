@@ -17,8 +17,22 @@ const customConfigurationsTest = () => {
 				expect(initialComponent.computedStyle.position).to.equal('absolute');
 				expect(initialComponent.computedStyle.right).to.equal('0px');
 				expect(initialComponent.computedStyle.left).to.not.equal('0px');
-});
 			});
+
+			it('should set position to default if position option not  set', function() {
+				const initialComponent = renderComponent();
+				const availablePositions = initialComponent.wrapper.instance().availablePositions;
+				const expectedClassName = availablePositions[0];
+				expect(initialComponent.wrapper.find(`.following-container--${expectedClassName}`)).to.have.length(1);
+			});
+
+			it('should set position to default if position option not one from "left" or "right"', function() {
+				const initialComponent = renderComponent({ position: 'left-corner' });
+				const availablePositions = initialComponent.wrapper.instance().availablePositions;
+				const expectedClassName = availablePositions[0];
+				expect(initialComponent.wrapper.find(`.following-container--${expectedClassName}`)).to.have.length(1);
+			});
+		});
 
 		describe('modify marginLeft option', function() {
 			it('should set margin-left style', function() {

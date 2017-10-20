@@ -16,6 +16,12 @@ React Higher Order Component (HOC) for creating moving component that sticks and
 2. When we scroll the browser's window it calculates the new position based on current viewpoint.
 3. Its top position changes based on the calculated position.
 
+## Installation
+```
+npm install --save react-following-container
+```
+This assumes you are using [npm](https://www.npmjs.com/) as package manager.
+
 ## Usage
 ```javascript
 const FollowingComponent = followingContainer(WrappedComponent, configurations);
