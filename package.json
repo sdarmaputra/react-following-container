@@ -3,7 +3,15 @@
   "version": "1.0.0",
   "description": "React JS following container",
   "main": "index.js",
-  "author": "Surya Darma Putra <sdarmaputra>",
+  "author": "Surya Darma Putra <surya.igede@gmail.com> (https://github.com/sdarmaputra)",
+  "repository": {
+	"type": "git",
+	"url": "https://github.com/sdarmaputra/react-following-container"
+  },
+  "bugs": {
+	"url": "https://github.com/sdarmaputra/react-following-container/issues"
+  },
+  "keywords": ["react", "hoc", "following", "container"],
   "license": "MIT",
   "scripts": {
     "dev": "webpack-dev-server --hot --open",
