@@ -5,17 +5,25 @@
   "main": "index.js",
   "author": "Surya Darma Putra <surya.igede@gmail.com> (https://github.com/sdarmaputra)",
   "repository": {
-	"type": "git",
-	"url": "https://github.com/sdarmaputra/react-following-container"
+    "type": "git",
+    "url": "https://github.com/sdarmaputra/react-following-container"
   },
   "bugs": {
-	"url": "https://github.com/sdarmaputra/react-following-container/issues"
+    "url": "https://github.com/sdarmaputra/react-following-container/issues"
   },
-  "keywords": ["react", "hoc", "following", "container"],
+  "keywords": [
+    "react",
+    "hoc",
+    "following",
+    "container"
+  ],
   "license": "MIT",
   "scripts": {
     "dev": "webpack-dev-server --hot --open",
-    "build": "webpack -p",
+    "build": "npm run build:js && npm run build:css",
+    "build:js": "babel src/libs --out-dir dist/libs",
+    "build:css": "node-sass src/libs -r -o dist/libs",
+    "build:examples": "webpack -p",
     "test": "rm -rf coverage && karma start --single-run --browsers ChromeHeadless karma.config.js",
     "watch-test": "rm -rf coverage && karma start karma.config.js",
     "coveralls": "cat ./coverage/headlesschrome/lcov.info | node_modules/coveralls/bin/coveralls.js"
@@ -23,10 +31,12 @@
   "dependencies": {
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "react-following-container": "^1.0.0",
     "react-router-dom": "^4.2.2"
   },
   "devDependencies": {
     "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-istanbul": "^4.1.5",

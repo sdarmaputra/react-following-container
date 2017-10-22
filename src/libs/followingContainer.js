@@ -1,5 +1,4 @@
 import React from 'react';
-import './followingContainer.scss';
 
 const initialConfigs = {
 	position: 'left',

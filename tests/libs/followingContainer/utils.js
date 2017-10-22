@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { shallow, mount } from 'enzyme';
 import sinon from 'sinon';
-import followingContainer from '../../../index.js';
+import followingContainer from '../../../src/libs/followingContainer';
 
 var containers = [];
 document.body.setAttribute('style', 'height: 3000px;');

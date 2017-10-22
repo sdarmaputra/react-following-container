@@ -1,3 +1,3 @@
-import followingContainer from './src/libs/followingContainer';
+const followingContainer = require('./dist/libs/followingContainer');
 
 module.exports = followingContainer;

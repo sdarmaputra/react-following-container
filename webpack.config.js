@@ -31,8 +31,8 @@ const configs = {
 				loader: 'babel-loader'
 			},
 			{
-				test: /\.scss$/,
-				include: SRC_DIR,
+				test: /\.(css|scss)$/,
+				//include: SRC_DIR,
 				use: extractSass.extract({
 					use: ['css-loader', 'sass-loader'],
 					fallback: 'style-loader'

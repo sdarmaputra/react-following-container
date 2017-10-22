@@ -24,6 +24,9 @@ This assumes you are using [npm](https://www.npmjs.com/) as package manager.
 
 ## Usage
 ```javascript
+import followingContainer from 'react-following-container';
+import 'react-following-container/dist/libs/followingContainer.css';
+
 const FollowingComponent = followingContainer(WrappedComponent, configurations);
 ```
 
@@ -37,6 +40,7 @@ It need two parameters to take effect.
 ```javascript
 import React from 'react';
 import followingContainer from 'react-following-container';
+import 'react-following-container/dist/libs/followingContainer.css';
 
 const Actions = (props) => (
     <ul>

@@ -1,0 +1,12 @@
+.following-container {
+  position: absolute;
+  transition: all 0.25s ease-in;
+  -moz-transition: all 0.25s ease-in;
+  -webkit-transition: all 0.25s ease-in;
+  -o-transition: all 0.25s ease-in; }
+  .following-container--hidden {
+    opacity: 0; }
+  .following-container--left {
+    left: 0; }
+  .following-container--right {
+    right: 0; }

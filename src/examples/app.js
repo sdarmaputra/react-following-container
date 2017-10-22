@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 
 import './app.scss';
+import '../libs/followingContainer.scss';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
